@@ -116,11 +116,11 @@ list<Aeroport> creaListAeroport(vector<string> s, list<Aeroport> &ap) {
 	string prueba = s[9];
 	cout << "s9 es " << s[9] << endl;
 	float timeZone = 0.0;
-	if (prueba == "\N"){
+	/*if (prueba == "\N"){ //amb valor \N dona error
 	 timeZone = 50.0;
 	 }else{
 	 timeZone= stof(s[9]); cout << "timeZone es " << timeZone << endl;
-	 }
+	 }*/
 	string DST = s[10];
 	cout << "DST es " << DST << endl;
 	string database_tz = s[11];
