@@ -22,7 +22,7 @@ class Avio {
 	//constructors
     Avio();
     Avio(string name, string IATAcode, string ICAOcode);
-		//void mostra();
+
 
 	//geters i seters
 		void setName (const string &s);

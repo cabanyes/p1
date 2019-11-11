@@ -31,7 +31,13 @@ class Aeroport {
   public:
 	//constructors
     Aeroport();
-    Aeroport(int airportID, string name, string city, string country, string IATA, string ICAO, long long latitude, long long longitude, int altitude, float timeZone, string DST, string databaseTz, string type, string source);
+    Aeroport(int airportID, string name,
+    		string city, string country,
+			string IATA, string ICAO,
+			long long latitude, long long longitude,
+			int altitude, float timeZone,
+			string DST, string databaseTz,
+			string type, string source);
 		//void mostra();
 
 	//geters i seters

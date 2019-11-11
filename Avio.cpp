@@ -12,7 +12,7 @@ using namespace std;
 	Avio::Avio(){
 		_name = "NULL";//Full name of the aircraft
   	_IATAcode = "NULL";//Unique three-letter IATA identifier for the aircraft
-  	_ICAOcode = "NULL"; //Unique four-letter ICAO identifier for the aircraft
+  	_ICAOcode = "NULL";//Unique four-letter ICAO identifier for the aircraft
   }
 
   Avio::Avio(string name, string IATAcode, string ICAOcode){
@@ -21,13 +21,6 @@ using namespace std;
   	_ICAOcode = ICAOcode; //Unique four-letter ICAO identifier for the aircraft
   }
 
-/*  void Avio::mostra(){
-  pre:cert
-  post: mostra per pantalla informació de l'objecte Avio
-		cout << _nom << " " << _cognoms;
-		cout << endl;
-  }
-*/
 
 		//geters i seters
 		void Avio::setName (const string &s){

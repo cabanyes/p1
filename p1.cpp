@@ -94,44 +94,44 @@ std::vector<std::string> getNextLineAndSplitIntoTokens(std::istream &str) {
 
 list<Aeroport> creaListAeroport(vector<string> s, list<Aeroport> &ap) {
 
-	int id = stoi(s[0]);
-	cout << "id es " << id << endl;
+	int airport_ID = stoi(s[0]);
+	//cout << "id es " << airport_ID << endl;
 	string name = s[1];
-	cout << "name es " << name << endl;
+	//cout << "name es " << name << endl;
 	string city = s[2];
-	cout << "city es " << city << endl;
+	//cout << "city es " << city << endl;
 	string country = s[3];
-	cout << "country es " << country << endl;
+	//cout << "country es " << country << endl;
 	string IATA = s[4];
-	cout << "IATA es " << IATA << endl;
+	//cout << "IATA es " << IATA << endl;
 	string ICAO = s[5];
-	cout << "ICAO es " << ICAO << endl;
+	//cout << "ICAO es " << ICAO << endl;
 	long long latitude = stof(s[6]);
-	cout << "latitude es " << latitude << endl;
+	//cout << "latitude es " << latitude << endl;
 	long long longitude = stof(s[7]);
-	cout << "longitude es " << longitude << endl;
+	//cout << "longitude es " << longitude << endl;
 	int altitude = stoi(s[8]);
-	cout << "altitude es " << altitude << endl;
+	//cout << "altitude es " << altitude << endl;
 
-	string prueba = s[9];
-	cout << "s9 es " << s[9] << endl;
-	float timeZone = 0.0;
-	/*if (prueba == "\N"){ //amb valor \N dona error
-	 timeZone = 50.0;
-	 }else{
-	 timeZone= stof(s[9]); cout << "timeZone es " << timeZone << endl;
-	 }*/
+	//cout << "s9 es " << s[9] << endl;
+	float timeZone;
+	if (s[9] == "\\N") { //amb valor \N dona error
+		timeZone = -13.0;
+	} else {
+		timeZone = stof(s[9]);
+	}
+
 	string DST = s[10];
-	cout << "DST es " << DST << endl;
-	string database_tz = s[11];
-	cout << "database_tz es " << database_tz << endl;
+	//cout << "DST es " << DST << endl;
+	string databaseTz = s[11];
+	//cout << "database_tz es " << databaseTz << endl;
 	string type = s[12];
-	cout << "type es " << type << endl;
+	//cout << "type es " << type << endl;
 	string source = s[13];
-	cout << "source es " << source << endl;
-//Aeroport aeroport1 = Aeroport(id, name, city, country, IATA, ICAO, latitude, longitude, altitude, timeZone, DST, database_tz, type,source);
+	//cout << "source es " << source << endl;
+	//Aeroport aeroport1 = Aeroport(airport_ID, name, city, country, IATA, ICAO,latitude, longitude, altitude, timeZone, DST, databaseTz, type, source);
 
-//ap.push_back(aeroport1);
+	//ap.push_back(aeroport1);
 
 	return ap;
 }
@@ -158,8 +158,10 @@ list<Avio> creaListAvions(vector<string> s, list<Avio> &av) {
 	string IATA = s[1]; //cout << "IATA es " << IATA << endl;
 	string ICAO = s[2]; // cout << "ICAO es " << ICAO << endl;
 
-//Avio avio1 = Avio(name, IATA, ICAO);
-//av.push_back(avio1);
+	Aeroport aeroport1 = Aeroport(airport_ID, name, city, country, IATA, ICAO,latitude, longitude, altitude, timeZone, DST, databaseTz, type, source);
+
+//Avio avio2 = Avio(name,IATA,ICAO);
+//av.push_back(avio2);
 
 	return av;
 }
@@ -167,42 +169,46 @@ list<Avio> creaListAvions(vector<string> s, list<Avio> &av) {
 list<Ruta> creaListRutes(vector<string> s, list<Ruta> &r) {
 
 	string airline = s[0];
-	cout << "airline es " << airline << endl;
-	string prova0 = s[1];
+	//cout << "airline es " << airline << endl;
 	int id;
-	/*if(prova0 == "\N"){
-	 id = -1000;
-	 }else{
-	 cout << "id es " << id << endl; //valor es 0
-	 id = stoi (s[1]);
-	 }*/
-	string sourceAirport = s[2];
-	cout << "sourceairport es " << sourceAirport << endl;
-	string prova1 = s[3];
-	cout << "s[3] es " << s[3] << endl;
+	if (s[1] == "\\N") {
+		id = -1;
+	} else {
+		//cout << "id es " << id << endl; //valor es 0
+		id = stoi(s[1]);
+	}
+	int sourceAirport;
+	if (s[2] == "\\N" or s[2].size() > 0) {
+		sourceAirport = -1;
+	} else {
+		sourceAirport = stoi(s[2]);
+	}
+
+	//cout << "sourceairport es " << sourceAirport << endl;
+
 	int sourceAirportID;
-	/*if (prova1 == "\N"){
-	 sourceAirportID = -1;
-	 }else{
-	 cout << "sourceairportID " << sourceAirportID << endl; // valor es 0
-	 sourceAirportID = stoi(s[3]);
-	 };*/
+	if (s[3] == "\\N") {
+		sourceAirportID = -1;
+	} else {
+		//cout << "sourceairportID " << sourceAirportID << endl; // valor es 0
+		sourceAirportID = stoi(s[3]);
+	};
 	string destinationAirport = s[4];
-	cout << "destination_airport es " << destinationAirport << endl;
-	string prova2 = s[5];
+	//cout << "destination_airport es " << destinationAirport << endl;
+
 	int destinationairportID;
-	/*if(prova2 == "\N"){
-	 destinationairportID = -1;
-	 }else{
-	 cout<<"["<<prova2<<"]"<<endl;
-	 destinationairportID = stoi (s[5]);//dona error amb valor \N
-	 };*/
+	if (s[5] == "\\N") {
+		destinationairportID = -1;
+	} else {
+
+		destinationairportID = stoi(s[5]); //dona error amb valor \N
+	};
 	string codeShare = s[6];
-	cout << "codeshare es " << codeShare << endl;
+	//cout << "codeshare es " << codeShare << endl;
 	int stops = stoi(s[7]);
-	cout << "stops es " << stops << endl;
+	//cout << "stops es " << stops << endl;
 	string equipment = s[8];
-	cout << "equipment es " << equipment << endl;
+	//cout << "equipment es " << equipment << endl;
 
 //Ruta ruta1 = Ruta(airline, id, sourceAirport, sourceAirportID, destinationAirport, destinationairportID, codeShare, stops, equipment);
 //r.push_back(ruta1);
@@ -211,58 +217,70 @@ list<Ruta> creaListRutes(vector<string> s, list<Ruta> &r) {
 }
 
 list<Vol> creaListVols(vector<string> s, list<Vol> &v) {
-	cout << "dins crear vols" << endl;
 
-	cout << "valor de s0 " << s[0] << endl;
-	int year = stoi(s[0]);
-	cout << "year " << year << endl;
-	int month = stoi(s[1]);
-	cout << "month " << month << endl;
-	int day_month = stoi(s[2]);
-	cout << "day_month " << day_month << endl;
-	int day_week = stoi(s[3]);
-	cout << "day_week " << day_week << endl;
-	string op_carrier = s[4];
-	cout << "op_carrier " << op_carrier << endl;
-	int op_carrier_fl_num = stoi(s[5]);
-	cout << "op_carrier_fl_num " << op_carrier_fl_num << endl;
-	string origin = s[6];
-	cout << "origin " << origin << endl;
-	string origin_city = s[7];
-	cout << "origin_city " << origin_city << endl;
-	string dest = s[8];
-	cout << "dest " << dest << endl;
-	string dest_city = s[9];
-	cout << "dest_city " << dest_city << endl;
-	int crs_departure_time = stoi(s[10]);
-	cout << "crs_departure_time " << crs_departure_time << endl;
-	int departure_time = 0;
-	/*
-	if (s[11].size() >= 0 or  not s[11].empty()){//dona error amb string buit
-		int departure_time = stoi(s[11]);
-	}else{
-		cout<<"["<<s[11]<<"]"<<endl;
-		//cout << "departure_time es " << s[11] << endl;
-		cout << " tamaño de departure_time es " << s[11].size() << endl;
-		cout << " lenght de departure_time es " << s[11].length() << endl;
+	int year = stoi(s[0]); //cout << "year " << year << endl;
+
+	int month = stoi(s[1]); //cout << "month " << month << endl;
+
+	int day_month = stoi(s[2]); //cout << "day_month " << day_month << endl;
+
+	int day_week = stoi(s[3]); //cout << "day_week " << day_week << endl;
+
+	string op_carrier = s[4]; //cout << "op_carrier " << op_carrier << endl;
+
+	int op_carrier_fl_num = stoi(s[5]); //cout << "op_carrier_fl_num " << op_carrier_fl_num << endl;
+
+	string origin = s[6]; //cout << "origin " << origin << endl;
+
+	string origin_city = s[7]; //cout << "origin_city " << origin_city << endl;
+
+	string dest = s[8]; //cout << "dest " << dest << endl;
+
+	string dest_city = s[9]; //cout << "dest_city " << dest_city << endl;
+
+	int crs_departure_time = stoi(s[10]); //cout << "crs_departure_time " << crs_departure_time << endl;
+
+	int departure_time;
+
+	if (s[11].size() > 0) { //dona error amb string buit
+		int departure_time = stoi(s[11]); //cout << "departure_time " << departure_time << endl;
 	}
-*/
-	int departure_delay = stoi(s[12]);
-	cout << "departure_delay" << departure_delay << endl;
-	int crs_arrival_time = stoi(s[13]);
-	cout << "crs_arrival_time" << crs_arrival_time << endl;
-	int arrival_time = stoi(s[14]);
-	cout << "arrival_time" << arrival_time << endl;
-	float arrival_delay = stof(s[15]);
-	cout << "arrival_delay " << arrival_delay << endl;
-	float cancelled = stof(s[16]);
-	cout << "cancelled  " << cancelled << endl;
-	float crs_elapsed_time = stof(s[17]);
-	cout << "crs_elapsed_time " << crs_elapsed_time << endl;
-	float elapsed_time = stof(s[18]);
-	cout << "elapsed_time " << elapsed_time << endl;
-	float distance_airports = stof(s[19]);
-	cout << "distance_airports " << distance_airports << endl;
+
+	int departure_delay;
+	if (s[12].size() > 0) { //dona error amb string buit
+		int departure_delay = stoi(s[12]); //cout << "departure_delay" << departure_delay << endl;
+	}
+
+	int crs_arrival_time = stoi(s[13]); //cout << "crs_arrival_time" << crs_arrival_time << endl;
+
+	int arrival_time;
+
+	if (s[14] == "\\N" or s[14].size() == 0) {
+		arrival_time = -1;
+	} else {
+
+		arrival_time = stoi(s[14]);
+	};
+
+	float arrival_delay;
+	if (s[15] == "\\N" or s[15].size() == 0) {
+		arrival_delay = -1;
+	} else {
+		arrival_delay = stof(s[15]); //cout << "arrival_delay " << arrival_delay << endl;
+	}
+
+	float cancelled = stof(s[16]); //cout << "cancelled  " << cancelled << endl;
+
+	float crs_elapsed_time = stof(s[17]); //cout << "crs_elapsed_time " << crs_elapsed_time << endl;
+
+	float elapsed_time;
+	if (s[18] == "\\N" or s[18].size() == 0) {
+		elapsed_time = -1;
+	} else {
+		elapsed_time = stof(s[18]); //cout << "elapsed_time " << elapsed_time << endl;
+	}
+
+	float distance_airports = stof(s[19]); //cout << "distance_airports " << distance_airports << endl;
 
 //Vol vol1 = Vol(year, month, day_month, day_week, op_carrier, op_carrier_fl_num, origin, origin_city, dest, dest_city, crs_departure_time, departure_time, departure_delay, crs_arrival_time, arrival_time, arrival_delay, cancelled, crs_elapsed_time, elapsed_time, distance_airports);
 
@@ -280,7 +298,7 @@ void gestionaFitxers(list<Aeroport> &ap, list<Aerolinia> &a, list<Avio> &av,
 
 	//arxiu aeroports///////////////////////////////////////////
 	getline(cin, nomArxiu);
-	cout << "nom arxiu" << nomArxiu << endl;
+	//cout << "nom arxiu" << nomArxiu << endl;
 	openFile(f, nomArxiu);
 
 	while (not f.eof()) {
@@ -297,11 +315,11 @@ void gestionaFitxers(list<Aeroport> &ap, list<Aerolinia> &a, list<Avio> &av,
 	/////////////////////////////////////////////////////////////
 	//arxiu aerolinies///////////////////////////////////////////
 	getline(cin, nomArxiu);
-	cout << "nom arxiu" << nomArxiu << endl;
+	//cout << "nom arxiu" << nomArxiu << endl;
 	openFile(f, nomArxiu);
 	j = 0;
 	row = getNextLineAndSplitIntoTokens(f);	//per saltar la linia que correspon a la capcelera del fitxer d'entrada
-	/*
+
 	while (not f.eof()) {
 		row = getNextLineAndSplitIntoTokens(f);
 		if (row.size() == 8) {
@@ -309,64 +327,64 @@ void gestionaFitxers(list<Aeroport> &ap, list<Aerolinia> &a, list<Avio> &av,
 		}
 		j++;
 	}
-*/
+
 	cout << "numero aerolinies " << j << endl;
 	f.close();
 	f.close();
 	/////////////////////////////////////////////////////////////
 	//arxiu avions///////////////////////////////////////////////
 	getline(cin, nomArxiu);
-	cout << "nom arxiu" << nomArxiu << endl;
+	//cout << "nom arxiu" << nomArxiu << endl;
 	openFile(f, nomArxiu);
 	j = 0;
-/*
+
 	while (not f.eof()) {
 		row = getNextLineAndSplitIntoTokens(f);
 		if (row.size() == 3) {
-			cout << "row de avions " << row.size() << endl;
+
 			creaListAvions(row, av);
 		}
 		j++;
 	}
-*/
+
 	cout << "numero avions " << j << endl;
 	f.close();
 	//////////////////////////////////////////////////////////////
 	//arxiu rutes////////////////////////////////////////////////
 	getline(cin, nomArxiu);
-	cout << "nom arxiu" << nomArxiu << endl;
+	//cout << "nom arxiu" << nomArxiu << endl;
 	openFile(f, nomArxiu);
 	j = 0;
-/*
+
 	while (not f.eof()) {
 		row = getNextLineAndSplitIntoTokens(f);
 		if (row.size() == 9) {
-			cout << "row de rutes " << row.size() << endl;
+
 			creaListRutes(row, r);
 		}
 		j++;
 	}
-*/
+
 	cout << "numero rutes " << j << endl;
 	f.close();
 	///////////////////////////////////////////////////////////
 	//arxiu vols//////////////////////////////////////////////
 	getline(cin, nomArxiu);
-	cout << "nom arxiu" << nomArxiu << endl;
+	//cout << "nom arxiu" << nomArxiu << endl;
 
 	openFile(f, nomArxiu);
 	j = 0;
 	row = getNextLineAndSplitIntoTokens(f);	//per ignorar capçelera
-/*
+
 	while (not f.eof()) {
 		row = getNextLineAndSplitIntoTokens(f);
 		if (row.size() == 21) {
-			cout << "row de vols " << row.size() << endl;
+
 			creaListVols(row, v);
 		}
 		j++;
 	}
-*/
+
 	cout << "numero vols " << j << endl;
 	f.close();
 	//////////////////////////////////////////////////////////////////////////////
